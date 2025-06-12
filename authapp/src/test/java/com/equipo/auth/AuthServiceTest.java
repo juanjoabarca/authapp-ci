@@ -15,4 +15,10 @@ public class AuthServiceTest {
         AuthService auth = new AuthService();
         assertFalse(auth.autenticar("admin", "xyz"));
     }
+
+    @Test
+    public void testCondicionFaltante() {
+        AuthService auth = new AuthService();
+        assertFalse(auth.autenticar("noexiste", "1234")); // False && True
+}
 }
