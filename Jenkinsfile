@@ -14,7 +14,7 @@ pipeline {
     stage('Build y Test') {
       steps {
         dir('authapp') {
-          sh 'mvn clean test'
+          sh 'mvn clean verify'
         }
       }
     }
