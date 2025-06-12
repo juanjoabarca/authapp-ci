@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 import java.util.Scanner;
 
 public class App {
+    private static final Logger logger = Logger.getLogger(App.class.getName());
     public static void main(String[] args) {
         AuthService authService = new AuthService();
         Scanner sc = new Scanner(System.in);
