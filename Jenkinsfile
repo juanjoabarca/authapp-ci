@@ -23,16 +23,18 @@ pipeline {
       steps {
         dir('authapp') {
           withSonarQubeEnv("${SONARQUBE_ENV}") {
-            sh '''
-              mvn sonar:sonar \
-                -Dsonar.projectKey=authapp \
-                -Dsonar.host.url=http://sonarqube:9000 \
-                -Dsonar.login=sqa_43a9409ff3e2eb46babd431ae6c4566ff6b579ae \
-                -Dsonar.coverage.jacoco.xmlReportPaths=authapp/target/site/jacoco/jacoco.xml
-            '''
-          }
+                        withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar-token')]) {
+                            sh '''
+                                mvn sonar:sonar \
+                                -Dsonar.projectKey=authapp \
+                                -Dsonar.host.url=http://sonarqube:9000 \
+                                -Dsonar.login=$sonar-token \
+                                -Dsonar.coverage.jacoco.xmlReportPaths=authapp/target/site/jacoco/jacoco.xml
+                            '''
+                        }
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
